@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+motor
+bcrypt
+python-dotenv
+python-jose[cryptography]
+pytest
+httpx
+pytest-asyncio
+passlib[bcrypt]
+python-decouple
