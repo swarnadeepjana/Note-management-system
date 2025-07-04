@@ -7,7 +7,7 @@ function NoteCard({ note }) {
   return (
     <div
       className="p-4 bg-white rounded shadow hover:bg-blue-50 cursor-pointer"
-      onClick={() => navigate(`/notes/${note._id}/edit`)}
+      onClick={() => navigate(`/Notes/${note._id}/edit`)}
     >
       <h3 className="text-lg font-bold text-blue-800">{note.title}</h3>
       <p className="text-sm text-gray-600 line-clamp-3 mt-1">{note.content}</p>
