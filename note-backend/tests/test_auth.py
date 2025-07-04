@@ -7,13 +7,13 @@ from app.db import db
 async def test_register_and_login():
     async with AsyncClient(app=app, base_url="http://test") as ac:
         
-        response = await ac.post("/Auth/Register", json={
+        response = await ac.post("/auth/register", json={
             "email": "test@example.com",
             "password": "test123"
         })
         assert response.status_code == 200
 
-        response = await ac.post("/Auth/Login", json={
+        response = await ac.post("/auth/login", json={
             "email": "test@example.com",
             "password": "test123"
         })
