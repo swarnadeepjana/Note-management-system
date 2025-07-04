@@ -1,4 +1,3 @@
-# app/models/note.py
 from app.db import db
 
 def get_note_collection():
