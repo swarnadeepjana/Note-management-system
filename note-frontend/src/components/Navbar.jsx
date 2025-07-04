@@ -15,8 +15,8 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
       <div className="space-x-4">
         {isLoggedIn ? (
           <>
-            <Link to="/Notes" className="hover:underline">Notes</Link>
-            <Link to="/Dashboard" className="hover:underline">Dashboard</Link>
+            <Link to="/notes" className="hover:underline">Notes</Link>
+            <Link to="/dashboard" className="hover:underline">Dashboard</Link>
             <button onClick={handleLogout} className="bg-white text-blue-600 px-3 py-1 rounded">
               Logout
             </button>
