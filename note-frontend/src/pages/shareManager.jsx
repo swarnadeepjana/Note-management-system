@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-function ShareManager() {
+function shareManager() {
   const { id } = useParams(); // Note ID
   const [sharedWith, setSharedWith] = useState([]);
   const [email, setEmail] = useState("");
@@ -103,4 +103,4 @@ const handleRemove = async (removeEmail) => {
   );
 }
 
-export default ShareManager;
+export default shareManager;
