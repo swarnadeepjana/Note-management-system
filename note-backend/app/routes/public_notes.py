@@ -18,7 +18,6 @@ async def view_public_note(note_id: str, request: Request):
     if not note:
         raise HTTPException(status_code=404, detail="Note not found")
 
-    # Log the view in a new collection
     await db.note_views.insert_one({
         "noteId": str(note["_id"]),
         "ip": request.client.host,
