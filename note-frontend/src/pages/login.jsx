@@ -11,7 +11,7 @@ function Login() {
     e.preventDefault();
     try {
       const res = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URL}/Auth/Login`,
+        `${import.meta.env.VITE_API_BASE_URL}/auth/login`,
         { email, password },
         {
           headers: {
@@ -24,7 +24,7 @@ function Login() {
 
       if (data.access_token) {
         localStorage.setItem("token", data.access_token); 
-        navigate("/Notes"); 
+        navigate("/notes"); 
       } else {
         alert("Invalid credentials.");
       }
@@ -68,4 +68,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default login;
