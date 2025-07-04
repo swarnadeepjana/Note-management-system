@@ -12,7 +12,7 @@ function Notes() {
 
   useEffect(() => {
     if (!token) {
-      navigate("/login");
+      navigate("/Login");
     } else {
       fetchNotes();
     }
@@ -20,7 +20,7 @@ function Notes() {
 
   const fetchNotes = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/notes`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/Notes`, {
         params: { search, page },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -31,7 +31,7 @@ function Notes() {
     } catch (err) {
       console.error("Error fetching notes:", err);
       if (err.response?.status === 401) {
-        navigate("/login");
+        navigate("/Login");
       }
     }
   };
@@ -44,7 +44,7 @@ function Notes() {
   const handleDelete = async (id) => {
   if (confirm("Are you sure you want to delete this notes?")) {
     try {
-      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/notes/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/Notes/${id}`, {
         headers:{
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
@@ -63,8 +63,8 @@ function Notes() {
     <div className="p-6 max-w-4xl mx-auto">
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Your Notes</h1>
-        <Link
-          to="/notes/new"
+         <Link
+          to="/Notes/new"
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           + New Notes
@@ -131,10 +131,6 @@ function Notes() {
 >
   Share via Gmail
 </a>
-
-
-
-
           <button
             onClick={() => handleDelete(note.id || note._id)}
             className="text-red-600 hover:underline"
