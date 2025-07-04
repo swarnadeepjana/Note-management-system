@@ -1,4 +1,3 @@
-# app/utils/shared.py
 from fastapi import HTTPException
 from app.db import db
 
