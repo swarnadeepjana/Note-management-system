@@ -1,4 +1,3 @@
-# app/services/analytics_service.py
 from app.models.note import get_note_collection
 from datetime import datetime, timedelta
 from collections import Counter
