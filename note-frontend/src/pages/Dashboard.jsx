@@ -1,10 +1,8 @@
-// src/pages/Dashboard.jsx
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Bar } from "react-chartjs-2";
 import { Chart, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "chart.js";
 
-// Register Chart.js components
 Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
 function Dashboard() {
