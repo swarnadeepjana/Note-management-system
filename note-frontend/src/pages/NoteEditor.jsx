@@ -1,4 +1,3 @@
-// src/pages/NoteEditor.jsx
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -14,11 +13,11 @@ function NoteEditor() {
 
   useEffect(() => {
   if (id) {
-    axios.get(`${import.meta.env.VITE_API_BASE_URL}/notes/${id}`, {
+    axios.get(`${import.meta.env.VITE_API_BASE_URL}/Notes/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then(res => {
-      console.log("Loaded note:", res.data); // ✅ Add this
+      console.log("Loaded note:", res.data); 
       const note = res.data;
       setTitle(note.title || "");
       setContent(note.content || "");
@@ -42,23 +41,24 @@ function NoteEditor() {
 
     try {
       if (id) {
-        // update
-        await axios.put(`${import.meta.env.VITE_API_BASE_URL}/notes/${id}`, noteData, {
+       
+        await axios.put(`${import.meta.env.VITE_API_BASE_URL}/Notes/${id}`, noteData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         });
       } else {
-        // create
-        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/notes`, noteData, {
+
+        
+        await axios.post(`${import.meta.env.VITE_API_BASE_URL}/Notes`, noteData, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
         });
       }
-      navigate("/notes");
+      navigate("/Notes");
     } catch (err) {
       console.error(err);
       alert("Failed to save note.");
