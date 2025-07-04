@@ -1,4 +1,3 @@
-# app/routes/analytics.py
 from fastapi import APIRouter
 from app.services.analytics_service import most_used_tags, notes_per_day, most_active_users
 from app.db import db
