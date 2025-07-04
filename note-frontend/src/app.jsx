@@ -1,45 +1,44 @@
-// src/App.jsx
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
-import Login from "./pages/Login";
-import Register from "./pages/Register";
-import Notes from "./pages/Notes";
-import NoteEditor from "./pages/NoteEditor";
-import ShareManager from "./pages/ShareManager";
-import Dashboard from "./pages/Dashboard";
-import Navbar from "./components/Navbar";
+import Login from "./pages/login";
+import Register from "./pages/register";
+import Notes from "./pages/notes";
+import NoteEditor from "./pages/noteEditor";
+import ShareManager from "./pages/shareManager";
+import Dashboard from "./pages/dashboard";
+import Navbar from "./components/navbar";
 
 function App() {
   const location = useLocation();
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
+  const [isloggedIn, setIsloggedIn] = useState(!!localStorage.getItem("token"));
 
   useEffect(() => {
     setIsLoggedIn(!!localStorage.getItem("token"));
   }, [location]);
 
-  const hideNavbar = ["/Login", "/Register"].includes(location.pathname);
+  const hideNavbar = ["/login", "/register"].includes(location.pathname);
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {!hideNavbar && <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
+      {!hidenavbar && <navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
       <Routes>
         {/* Public routes */}
-        <Route path="/Login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/Register" element={<Register />} />
+        <Route path="/login" element={<login setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/register" element={<register />} />
 
         {/* Private routes */}
         {isLoggedIn ? (
           <>
-            <Route path="/" element={<Navigate to="/notes" />} />
-            <Route path="/Notes" element={<Notes />} />
-            <Route path="/Notes/new" element={<NoteEditor />} />
-            <Route path="/Notes/:id/edit" element={<NoteEditor />} />
-            <Route path="/Notes/:id/share" element={<ShareManager />} />
-            <Route path="/Dashboard" element={<Dashboard />} />
+            <Route path="/" element={<navigate to="/notes" />} />
+            <Route path="/notes" element={<notes />} />
+            <Route path="/notes/new" element={<noteEditor />} />
+            <Route path="/notes/:id/edit" element={<noteEditor />} />
+            <Route path="/notes/:id/share" element={shareManager />} />
+            <Route path="/dashboard" element={<dashboard />} />
           </>
         ) : (
           // Redirect all unknown routes to login
-          <Route path="*" element={<Navigate to="/login" />} />
+          <Route path="*" element={<navigate to="/login" />} />
         )}
       </Routes>
     </div>
