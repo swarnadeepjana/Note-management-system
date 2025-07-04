@@ -1,4 +1,3 @@
-# app/models/user.py
 from app.db import db
 
 def get_user_collection():
