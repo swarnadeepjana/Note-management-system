@@ -1,12 +1,12 @@
 import { Link, useNavigate } from "react-router-dom";
 
-function Navbar({ isLoggedIn, setIsLoggedIn }) {
+function navbar({ isLoggedIn, setIsLoggedIn }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
-    navigate("/Login");
+    navigate("/login");
   };
 
   return (
@@ -15,16 +15,16 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
       <div className="space-x-4">
         {isLoggedIn ? (
           <>
-            <Link to="/notes" className="hover:underline">Notes</Link>
-            <Link to="/dashboard" className="hover:underline">Dashboard</Link>
+            <Link to="/notes" className="hover:underline">notes</Link>
+            <Link to="/dashboard" className="hover:underline">dashboard</Link>
             <button onClick={handleLogout} className="bg-white text-blue-600 px-3 py-1 rounded">
               Logout
             </button>
           </>
         ) : (
           <>
-            <Link to="/Login" className="hover:underline">Login</Link>
-            <Link to="/Register" className="hover:underline">Register</Link>
+            <Link to="/login" className="hover:underline">login</Link>
+            <Link to="/register" className="hover:underline">register</Link>
           </>
         )}
       </div>
