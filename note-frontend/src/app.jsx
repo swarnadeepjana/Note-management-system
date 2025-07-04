@@ -31,11 +31,11 @@ function App() {
         {isLoggedIn ? (
           <>
             <Route path="/" element={<Navigate to="/notes" />} />
-            <Route path="/notes" element={<Notes />} />
-            <Route path="/notes/new" element={<NoteEditor />} />
-            <Route path="/notes/:id/edit" element={<NoteEditor />} />
-            <Route path="/notes/:id/share" element={<ShareManager />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/Notes" element={<Notes />} />
+            <Route path="/Notes/new" element={<NoteEditor />} />
+            <Route path="/Notes/:id/edit" element={<NoteEditor />} />
+            <Route path="/Notes/:id/share" element={<ShareManager />} />
+            <Route path="/Dashboard" element={<Dashboard />} />
           </>
         ) : (
           // Redirect all unknown routes to login
