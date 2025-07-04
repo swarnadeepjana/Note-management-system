@@ -5,7 +5,7 @@ import { Chart, BarElement, CategoryScale, LinearScale, Tooltip, Legend } from "
 
 Chart.register(BarElement, CategoryScale, LinearScale, Tooltip, Legend);
 
-function Dashboard() {
+function dashboard() {
   const [topUsers, setTopUsers] = useState([]);
   const [topTags, setTopTags] = useState([]);
   const [notesPerDay, setNotesPerDay] = useState([]);
@@ -68,4 +68,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default dashboard;
