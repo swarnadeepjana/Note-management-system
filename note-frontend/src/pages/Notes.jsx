@@ -49,7 +49,6 @@ function Notes() {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
-      // Refresh list
       fetchNotes();
     } catch (err) {
       console.error("Error deleting note:", err.response?.data || err.message);
