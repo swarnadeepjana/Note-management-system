@@ -1,4 +1,3 @@
-# app/services/auth_service.py
 from fastapi import HTTPException
 from app.core.security import hash_password, verify_password, create_access_token
 from app.models.user import get_user_collection
