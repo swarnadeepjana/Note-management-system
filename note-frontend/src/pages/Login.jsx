@@ -1,4 +1,3 @@
-// src/pages/Login.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -24,8 +23,8 @@ function Login() {
       const data = res.data;
 
       if (data.access_token) {
-        localStorage.setItem("token", data.access_token); // ✅ fixed here
-        navigate("/notes"); // ✅ successful redirect
+        localStorage.setItem("token", data.access_token); 
+        navigate("/Notes"); 
       } else {
         alert("Invalid credentials.");
       }
