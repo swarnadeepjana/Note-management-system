@@ -13,3 +13,4 @@ aiohttp-cors
 aiofiles
 pydantic-settings>=2.0.0
 pydantic[email]
+pytz
