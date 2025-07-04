@@ -9,3 +9,5 @@ httpx
 pytest-asyncio
 passlib[bcrypt]
 python-decouple
+aiohttp-cors
+aiofiles
