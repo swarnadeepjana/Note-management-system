@@ -1,4 +1,3 @@
-# app/services/notes_service.py
 from fastapi import HTTPException
 from app.models.note import get_note_collection
 from datetime import datetime
@@ -57,7 +56,6 @@ async def update_note(note_id: str, data: dict, user: str):
     if not note:
         raise HTTPException(status_code=404, detail="Note not found")
 
-    # ✅ Owner always has access
     if note["owner"] != user:
         allowed = False
         for entry in note.get("sharedWith", []):
@@ -67,7 +65,6 @@ async def update_note(note_id: str, data: dict, user: str):
         if not allowed:
             raise HTTPException(status_code=403, detail="No write permission")
 
-    # ✅ Clean and apply update
     allowed_fields = {"title", "content", "tags", "sharedWith"}
     filtered_data = {k: v for k, v in data.items() if k in allowed_fields}
     filtered_data["updatedAt"] = datetime.now(IST)
