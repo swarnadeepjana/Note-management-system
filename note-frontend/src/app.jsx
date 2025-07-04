@@ -13,21 +13,19 @@ function App() {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
-  // Update login state on route change
   useEffect(() => {
     setIsLoggedIn(!!localStorage.getItem("token"));
   }, [location]);
 
-  // Hide navbar on login/register
-  const hideNavbar = ["/login", "/register"].includes(location.pathname);
+  const hideNavbar = ["/Login", "/Register"].includes(location.pathname);
 
   return (
     <div className="min-h-screen bg-gray-50">
       {!hideNavbar && <Navbar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />}
       <Routes>
         {/* Public routes */}
-        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/Login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path="/Register" element={<Register />} />
 
         {/* Private routes */}
         {isLoggedIn ? (
