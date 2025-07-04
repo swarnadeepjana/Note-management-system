@@ -11,12 +11,12 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, {
+      await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/Register`, {
         email,
         password,
       });
       alert("Registered successfully");
-      navigate("/login");
+      navigate("/Login");
     } catch (err) {
       alert("Registration failed");
     }
@@ -46,7 +46,7 @@ function Register() {
           Register
         </button>
         <p className="text-sm text-center mt-3">
-          Already have an account? <a href="/login" className="text-blue-500 underline">Login</a>
+          Already have an account? <a href="/Login" className="text-blue-500 underline">Login</a>
         </p>
       </form>
     </div>
