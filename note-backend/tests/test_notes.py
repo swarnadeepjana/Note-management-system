@@ -27,6 +27,5 @@ async def test_note_crud():
         }, headers=headers)
         assert update.status_code == 200
 
-        # Delete note
         delete = await ac.delete(f"/Notes/{note_id}", headers=headers)
         assert delete.status_code == 200
