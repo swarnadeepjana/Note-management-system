@@ -1,4 +1,3 @@
-# app/routes/public_notes.py
 from fastapi import APIRouter, HTTPException, Request
 from bson import ObjectId
 from datetime import datetime
