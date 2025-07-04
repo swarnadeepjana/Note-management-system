@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-function NoteCard({ note }) {
+function noteCard({ note }) {
   const navigate = useNavigate();
 
   return (
@@ -17,4 +17,4 @@ function NoteCard({ note }) {
   );
 }
 
-export default NoteCard;
+export default noteCard;
