@@ -1,4 +1,3 @@
-# app/routes/share.py
 from fastapi import APIRouter, Depends, HTTPException
 from app.models.note import get_note_collection
 from app.core.security import decode_access_token
@@ -7,7 +6,7 @@ from bson import ObjectId
 from app.db import db
 
 router = APIRouter()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="Auth/Login")
 notes = get_note_collection()
 
 def get_current_user(token: str = Depends(oauth2_scheme)):
