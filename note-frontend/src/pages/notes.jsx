@@ -12,7 +12,7 @@ function Notes() {
 
   useEffect(() => {
     if (!token) {
-      navigate("/Login");
+      navigate("/login");
     } else {
       fetchNotes();
     }
@@ -20,7 +20,7 @@ function Notes() {
 
   const fetchNotes = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/Notes`, {
+      const res = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/notes`, {
         params: { search, page },
         headers: {
           Authorization: `Bearer ${token}`,
@@ -63,7 +63,7 @@ function Notes() {
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold">Your Notes</h1>
          <Link
-          to="/Notes/new"
+          to="/notes/new"
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
         >
           + New Notes
@@ -169,4 +169,4 @@ function Notes() {
   );
 }
 
-export default Notes;
+export default notes;
