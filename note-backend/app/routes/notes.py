@@ -1,4 +1,3 @@
-# app/routes/notes.py
 from fastapi import APIRouter, Depends, HTTPException
 from app.services.notes_service import create_note, get_user_notes, update_note, delete_note
 from app.schemas.note import NoteCreate, NoteUpdate
@@ -15,7 +14,7 @@ from datetime import datetime
 
 
 router = APIRouter()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="Auth/Login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
 
 def get_current_user(token: str = Depends(oauth2_scheme)):
     user = decode_access_token(token)
@@ -64,7 +63,6 @@ async def get_single_note(note_id: str, user: str = Depends(get_current_user)):
     if not note:
         raise HTTPException(status_code=404, detail="Note not found")
 
-    # ✅ Check if user is allowed to access
     if note["owner"] != user:
         allowed = any(
             entry["email"] == user for entry in note.get("sharedWith", [])
@@ -72,7 +70,6 @@ async def get_single_note(note_id: str, user: str = Depends(get_current_user)):
         if not allowed:
             raise HTTPException(status_code=403, detail="You do not have permission to view this note")
 
-    # ✅ Format for frontend
     note["id"] = str(note["_id"])
     del note["_id"]
     return note
