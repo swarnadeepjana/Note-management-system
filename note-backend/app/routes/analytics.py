@@ -179,17 +179,14 @@ async def debug_analytics(user: str = Depends(get_current_user)):
     
     analytics = db.get_collection("analytics")
     
-    # Get all analytics data
     all_data = await analytics.find().sort("timestamp", -1).to_list(50)
     
-    # Get login/logout events for tracked users
     tracked_users = ["swarnadeep896@gmail.com", "jimmycarter@gmail.com", "willphilips364@yahoo.com"]
     login_logout_data = await analytics.find({
         "event": {"$in": ["login", "logout"]},
         "email": {"$in": tracked_users}
     }).sort("timestamp", -1).to_list(50)
     
-    # Get study data for tracked users
     study_data = await analytics.find({
         "timeSpent": {"$exists": True, "$ne": None},
         "email": {"$in": tracked_users}
@@ -212,7 +209,6 @@ async def create_test_data(user: str = Depends(get_current_user)):
     
     analytics = db.get_collection("analytics")
     
-    # Create test data for the last 7 days
     from datetime import timedelta
     import random
     
@@ -223,7 +219,6 @@ async def create_test_data(user: str = Depends(get_current_user)):
         date = datetime.utcnow() - timedelta(days=i)
         
         for user_email in tracked_users:
-            # Create login event
             login_time = date.replace(hour=9 + random.randint(0, 2), minute=random.randint(0, 59))
             test_data.append({
                 "email": user_email,
@@ -231,7 +226,6 @@ async def create_test_data(user: str = Depends(get_current_user)):
                 "timestamp": login_time
             })
             
-            # Create logout event (2-4 hours later)
             logout_time = login_time + timedelta(hours=2 + random.randint(0, 2), minutes=random.randint(0, 59))
             test_data.append({
                 "email": user_email,
@@ -239,7 +233,6 @@ async def create_test_data(user: str = Depends(get_current_user)):
                 "timestamp": logout_time
             })
             
-            # Create study session data
             study_time = random.randint(300, 1800)  # 5-30 minutes
             test_data.append({
                 "email": user_email,
@@ -248,7 +241,6 @@ async def create_test_data(user: str = Depends(get_current_user)):
                 "timestamp": login_time + timedelta(minutes=random.randint(10, 60))
             })
     
-    # Insert test data
     if test_data:
         await analytics.insert_many(test_data)
     
