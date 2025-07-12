@@ -56,7 +56,6 @@ function Dashboard() {
 
   useEffect(() => {
     fetchAnalytics();
-    // Fetch additional admin-only data
     axios.get(`${import.meta.env.VITE_API_BASE_URL}/analytics/user-activity`, {
       headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
     })
@@ -74,7 +73,7 @@ function Dashboard() {
     try {
       const res = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/analytics/create-test-data`, {}, { headers });
       alert(`Test data created: ${res.data.message}`);
-      fetchAnalytics(); // Refresh analytics
+      fetchAnalytics(); 
     } catch (err) {
       alert(`Error creating test data: ${err.response?.data?.detail || err.message}`);
     }
@@ -96,7 +95,6 @@ function Dashboard() {
       
       console.log("Analytics response:", res.data); // Debug log
       
-      // Handle both new and old API structures
       if (res.data.top_users && res.data.top_tags && res.data.notes_per_day) {
         setAnalytics(res.data);
       } else {
@@ -153,7 +151,6 @@ function Dashboard() {
     }
   };
 
-  // Most Active User Chart Data
   const mostActiveUserChartData = {
     labels: analytics.most_active_chart.labels,
     datasets: [
@@ -255,7 +252,6 @@ function Dashboard() {
     ],
   };
 
-  // Find the most active user by session time
   let mostActiveUser = null;
   let maxSessionTime = 0;
   if (Object.keys(sessionDurations).length > 0) {
