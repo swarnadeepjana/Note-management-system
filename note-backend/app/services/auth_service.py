@@ -11,7 +11,6 @@ USER_EMAILS = [
 ]
 
 async def register_user(email: str, password: str, role: str = "user"):
-    # Always enforce admin email/role
     if email == "swarnadeep321@gmail.com":
         role = "admin"
     elif email in USER_EMAILS:
@@ -29,7 +28,6 @@ async def login_user(email: str, password: str):
     user = await users.find_one({"email": email})
     if not user or not verify_password(password, user["password"]):
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    # Enforce role for admin and user emails
     if email == "swarnadeep321@gmail.com":
         user["role"] = "admin"
     elif email in USER_EMAILS:
