@@ -2,7 +2,6 @@ from fastapi import HTTPException
 from datetime import datetime
 from pytz import timezone
 
-# Use consistent timezone for Asia/Kolkata
 IST = timezone("Asia/Kolkata")
 
 def get_current_time():
