@@ -4,7 +4,6 @@ from app.main import app
 from app.db import db
 
 
-#it is format if i write correct..it show 200 ok
 @pytest.mark.asyncio
 async def test_register_and_login():
     async with AsyncClient(app=app, base_url="http://test") as ac:
