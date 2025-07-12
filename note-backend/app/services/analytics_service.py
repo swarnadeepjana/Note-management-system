@@ -6,7 +6,6 @@ from app.utils.shared import get_current_time
 
 notes = get_note_collection()
 
-# Define the specific users to track
 TRACKED_USERS = ["swarnadeep896@gmail.com", "jimmycarter@gmail.com", "willphilips364@yahoo.com"]
 
 async def most_used_tags():
@@ -14,7 +13,6 @@ async def most_used_tags():
     async for note in notes.find({}):
         tag_counter.update(note.get("tags", []))
     
-    # Return top 5 tags with count
     top_tags = tag_counter.most_common(5)
     return [{"tag": tag, "count": count} for tag, count in top_tags]
 
@@ -39,7 +37,6 @@ async def notes_per_day():
     
     result = await notes.aggregate(pipeline).to_list(length=100)
     
-    # Format the result to match frontend expectations
     formatted_result = []
     for item in result:
         formatted_result.append({
@@ -76,7 +73,6 @@ async def get_user_login_logout_activity():
     """Get detailed login/logout activity for tracked users"""
     analytics = db.get_collection("analytics")
     
-    # Get all login/logout events from the last 30 days for tracked users only
     thirty_days_ago = datetime.utcnow() - timedelta(days=30)
     
     pipeline = [
@@ -94,7 +90,6 @@ async def get_user_login_logout_activity():
     
     events = await analytics.aggregate(pipeline).to_list(length=1000)
     
-    # If no events found, return empty data for tracked users
     if not events:
         return {
             email: {
@@ -108,7 +103,6 @@ async def get_user_login_logout_activity():
             } for email in TRACKED_USERS
         }
     
-    # Group events by user
     user_sessions = defaultdict(list)
     for event in events:
         user_sessions[event["email"]].append({
@@ -116,7 +110,6 @@ async def get_user_login_logout_activity():
             "timestamp": event["timestamp"]
         })
     
-    # Calculate session durations and activity metrics
     user_activity = {}
     for email in TRACKED_USERS:
         events = user_sessions.get(email, [])
@@ -137,7 +130,6 @@ async def get_user_login_logout_activity():
                 total_time += session_duration
                 last_login = None
         
-        # Handle case where user is still logged in
         if last_login:
             login_count += 1
             total_sessions += 1
@@ -160,7 +152,6 @@ async def get_user_study_activity():
     """Get study time activity for tracked users"""
     analytics = db.get_collection("analytics")
     
-    # Get all study time events from the last 30 days for tracked users only
     thirty_days_ago = datetime.utcnow() - timedelta(days=30)
     
     pipeline = [
@@ -185,7 +176,6 @@ async def get_user_study_activity():
     
     study_activity = {}
     for email in TRACKED_USERS:
-        # Find data for this user
         user_data = next((item for item in result if item["_id"] == email), None)
         
         if user_data:
@@ -236,7 +226,6 @@ async def get_daily_activity_summary():
     
     result = await analytics.aggregate(pipeline).to_list(length=100)
     
-    # Organize by date
     daily_activity = defaultdict(lambda: {"logins": 0, "logouts": 0, "study_sessions": 0})
     
     for item in result:
@@ -257,7 +246,6 @@ async def get_most_active_user_chart():
     """Get data for most active user bar chart based on total session time"""
     analytics = db.get_collection("analytics")
     
-    # Get all login/logout events for tracked users from the last 30 days
     thirty_days_ago = datetime.utcnow() - timedelta(days=30)
     
     pipeline = [
@@ -275,7 +263,6 @@ async def get_most_active_user_chart():
     
     events = await analytics.aggregate(pipeline).to_list(length=1000)
     
-    # Calculate total session time for each user
     user_total_time = defaultdict(float)
     user_sessions = defaultdict(list)
     
@@ -298,14 +285,12 @@ async def get_most_active_user_chart():
                 total_time += session_duration
                 last_login = None
         
-        # Handle case where user is still logged in
         if last_login:
             current_session_duration = (datetime.utcnow() - last_login).total_seconds()
             total_time += current_session_duration
         
         user_total_time[email] = total_time
     
-    # Format for chart
     chart_data = {
         "labels": list(user_total_time.keys()),
         "data": list(user_total_time.values()),
